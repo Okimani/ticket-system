@@ -17,7 +17,7 @@ export default class StatusChart extends Component {
 		this.progress = 0;
 		this.resolved = 0;
 
-		this.state = { 
+		this.state = {
 			tickets: [],
 			data: {
 			    datasets: [{
@@ -31,13 +31,13 @@ export default class StatusChart extends Component {
 	}
 
 	componentDidMount() {
-        axios.get('http://localhost:5000/tickets/')
+        axios.get('http://localhost:8080/tickets/')
             .then(res => {
                 this.setState({ tickets: res.data });
                 this.state.tickets.map(ticket => {
                 	// get number of each type and update state data
                 	switch(ticket.status){
-                		case 'Open': 
+                		case 'Open':
                 			this.open++;
                 			break;
                 		case 'In Progress':
@@ -61,7 +61,7 @@ export default class StatusChart extends Component {
 	render() {
 		return(
 			<div>
-				<Doughnut 
+				<Doughnut
 					data={this.state.data}
 					options={options}
 					height={300}

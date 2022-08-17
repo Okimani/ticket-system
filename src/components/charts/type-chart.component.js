@@ -18,7 +18,7 @@ export default class TypeChart extends Component {
 		this.security = 0;
 		this.other = 0;
 
-		this.state = { 
+		this.state = {
 			tickets: [],
 			data: {
 				labels: labels,
@@ -32,14 +32,14 @@ export default class TypeChart extends Component {
 	}
 
 	componentDidMount() {
-        axios.get('http://localhost:5000/tickets/')
+        axios.get('http://localhost:8080/tickets/')
             .then(res => {
                 this.setState({ tickets: res.data });
                 this.state.tickets.map(ticket => {
                 	// get number of each type and update state data
                 	if(ticket.status !== 'Resolved'){
 	                	switch(ticket.type){
-	                		case 'Bug/Error': 
+	                		case 'Bug/Error':
 	                			this.bug++;
 	                			break;
 	                		case 'Feature Request':
@@ -67,7 +67,7 @@ export default class TypeChart extends Component {
 	render() {
 		return(
 			<div>
-				<Doughnut 
+				<Doughnut
 					data={this.state.data}
 					options={options}
 					height={300}

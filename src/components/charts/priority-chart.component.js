@@ -26,7 +26,7 @@ export default class PriorityChart extends Component {
 		this.medium = 0;
 		this.high = 0;
 
-		this.state = { 
+		this.state = {
 			tickets: [],
 			data: {
 				labels: labels,
@@ -41,14 +41,14 @@ export default class PriorityChart extends Component {
 	}
 
 	componentDidMount() {
-        axios.get('http://localhost:5000/tickets/')
+        axios.get('http://localhost:8080/tickets/')
             .then(res => {
                 this.setState({ tickets: res.data });
                 this.state.tickets.map(ticket => {
                 	// get number of each priority and update state data
                 	if(ticket.status !== 'Resolved'){
 	                	switch(ticket.priority){
-	                		case 'Low': 
+	                		case 'Low':
 	                			this.low++;
 	                			break;
 	                		case 'Medium':
@@ -73,7 +73,7 @@ export default class PriorityChart extends Component {
 	render() {
 		return(
 			<div>
-				<Bar 
+				<Bar
 					data={this.state.data}
 					options={options}
 					height={350}

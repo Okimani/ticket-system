@@ -9,10 +9,10 @@ const User = props => (
         <td>{props.user.email}</td>
         <td>{props.user.role}</td>
         <td>
-            <a href="#" onClick={() => { 
-                if(window.confirm('Are you sure you want to delete this user?')) 
-                    props.deleteUser(props.user._id) 
-            }} 
+            <a href="#" onClick={() => {
+                if(window.confirm('Are you sure you want to delete this user?'))
+                    props.deleteUser(props.user._id)
+            }}
             className="badge badge-danger">Delete</a>
         </td>
     </tr>
@@ -28,7 +28,7 @@ export default class ManageUsers extends Component {
 	}
 
     componentDidMount() {
-        axios.get('http://localhost:5000/users/')
+        axios.get('http://localhost:8080/users/')
             .then(res => {
                 this.setState({ users: res.data })
             })
@@ -36,7 +36,7 @@ export default class ManageUsers extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:5000/users/')
+        axios.get('http://localhost:8080/users/')
             .then(res => {
                 this.setState({ users: res.data })
             })
@@ -44,7 +44,7 @@ export default class ManageUsers extends Component {
     }
 
     deleteUser(id) {
-	    axios.delete('http://localhost:5000/users/'+id)
+	    axios.delete('http://localhost:8080/users/'+id)
 	        .then(res => { console.log(res.data)});
 
 	    // update tickets array to all users without matching id
@@ -56,7 +56,7 @@ export default class ManageUsers extends Component {
     getUsers() {
         return this.state.users.map(currentUser => {
             return <User
-            			user={currentUser} 
+            			user={currentUser}
             			deleteUser={this.deleteUser}
                         key={currentUser._id}
                     />;

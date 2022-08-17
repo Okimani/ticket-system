@@ -5,11 +5,11 @@ import MarkButton from './mark-button';
 
 let getPriorities = (lvl) => {
     switch(lvl) {
-        case 'Low': 
+        case 'Low':
             return <td className="low-priority">{lvl}</td>;
         case 'Medium':
             return <td className="med-priority">{lvl}</td>;
-        case 'High': 
+        case 'High':
             return <td className="high-priority">{lvl}</td>;
         default:
             return <td>{lvl}</td>;
@@ -27,7 +27,7 @@ export default class Ticket extends Component {
 
     componentDidMount() {
         // default state of ticket
-        axios.get('http://localhost:5000/tickets/'+this.props.ticket._id)
+        axios.get('http://localhost:8080/tickets/'+this.props.ticket._id)
             .then(res => {
                 this.setState({
                     title: res.data.title,
@@ -43,7 +43,7 @@ export default class Ticket extends Component {
     }
 
     onChangeStatus(e) {
-        // axios.post('http://localhost:5000/tickets/update/' + this.props.ticket._id, this.props.ticket)
+        // axios.post('http://localhost:8080/tickets/update/' + this.props.ticket._id, this.props.ticket)
         //     .then(res => console.log(res.data));
     }
 
@@ -60,28 +60,28 @@ export default class Ticket extends Component {
                 <td>
                     <Link to={"/edit/"+this.props.ticket._id} className="badge badge-info">Edit</Link>
                     <br></br>
-                    <a href="#" onClick={() => { 
-                        if(window.confirm('Are you sure you want to delete this ticket?')) 
-                            this.props.deleteTicket(this.props.ticket._id) 
-                    }} 
+                    <a href="#" onClick={() => {
+                        if(window.confirm('Are you sure you want to delete this ticket?'))
+                            this.props.deleteTicket(this.props.ticket._id)
+                    }}
                     className="badge badge-danger">Delete</a>
                     <br></br>
-                    
-                    <MarkButton 
-                        mark={this.props.ticket.status} 
+
+                    <MarkButton
+                        mark={this.props.ticket.status}
                         ticketID={this.props.ticket._id}
                     />
                     {   /* *****
                         *  FIX THIS TO UPDATE STATE
                         * *****/
-                        // this.props.ticket.status !== 'Resolved' ? 
+                        // this.props.ticket.status !== 'Resolved' ?
                         // <a href="#" onClick={() => {
-                        //     this.props.ticket.status = 'Resolved' 
-                        // }} 
+                        //     this.props.ticket.status = 'Resolved'
+                        // }}
                         // className="badge badge-success">Mark as Resolved</a> :
                         // <a href="#" onClick={() => {
-                        //     this.props.ticket.status = 'Open' 
-                        // }} 
+                        //     this.props.ticket.status = 'Open'
+                        // }}
                         // className="badge badge-secondary">Mark as Open</a>
                     }
                 </td>

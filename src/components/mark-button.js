@@ -7,7 +7,7 @@ export default class MarkButton extends React.Component {
 
         this.handleClick = this.handleClick.bind(this);
 
-		this.state = { 
+		this.state = {
             title: '',
             description: '',
             projectName: '',
@@ -22,7 +22,7 @@ export default class MarkButton extends React.Component {
 
 	componentDidMount() {
         // default state of ticket
-        axios.get('http://localhost:5000/tickets/'+this.props._id)
+        axios.get('http://localhost:8080/tickets/'+this.props.ticketID)
             .then(res => {
                 this.setState({
                     title: res.data.title,
@@ -37,7 +37,7 @@ export default class MarkButton extends React.Component {
             .catch((error) => { console.log(error); })
 
         // get list of users to select from
-        axios.get('http://localhost:5000/users/')
+        axios.get('http://localhost:8080/users/')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -48,7 +48,7 @@ export default class MarkButton extends React.Component {
         .catch((error) => { console.log(error); })
 
         // get list of projects to select from
-        axios.get('http://localhost:5000/projects/')
+        axios.get('http://localhost:8080/projects/')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -63,7 +63,7 @@ export default class MarkButton extends React.Component {
         e.preventDefault();
 
         this.state.status !== 'Resolved' ?
-        this.setState({status: 'Resolved'}) : 
+        this.setState({status: 'Resolved'}) :
         this.setState({status: 'Open'})
 
         const ticket = {
@@ -76,19 +76,19 @@ export default class MarkButton extends React.Component {
             type: this.state.type
         }
 
-        axios.post('http://localhost:5000/tickets/update/' + this.props._id, ticket)
+        axios.post('http://localhost:8080/tickets/update/' + this.props.ticketID, ticket)
             .then(res => console.log(res.data));
-            
+
         alert('Successfully updated.');
     }
-	
+
 	render() {
 		return(
-            this.state.status !== 'Resolved' ? 
-            <a href="#" onClick={this.handleClick} 
+            this.state.status !== 'Resolved' ?
+            <a href="#" onClick={this.handleClick}
             className="badge badge-success">Mark as Resolved</a> :
             <a href="#" onClick={this.handleClick}
-            className="badge badge-secondary">Mark as Open</a>          
+            className="badge badge-secondary">Mark as Open</a>
 		);
 	}
 }

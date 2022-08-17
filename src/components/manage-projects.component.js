@@ -7,10 +7,10 @@ const Project = props => (
     <tr>
         <td>{props.project.name}</td>
         <td>
-            <a href="#" onClick={() => { 
-                if(window.confirm('Are you sure you want to delete this project?')) 
-                    props.deleteProject(props.project._id) 
-            }} 
+            <a href="#" onClick={() => {
+                if(window.confirm('Are you sure you want to delete this project?'))
+                    props.deleteProject(props.project._id)
+            }}
             className="badge badge-danger">Delete</a>
         </td>
     </tr>
@@ -26,7 +26,7 @@ export default class ManageProjects extends Component {
 	}
 
     componentDidMount() {
-        axios.get('http://localhost:5000/projects/')
+        axios.get('http://localhost:8080/projects/')
             .then(res => {
                 this.setState({ projects: res.data })
             })
@@ -34,7 +34,7 @@ export default class ManageProjects extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:5000/projects/')
+        axios.get('http://localhost:8080/projects/')
             .then(res => {
                 this.setState({ projects: res.data })
             })
@@ -42,7 +42,7 @@ export default class ManageProjects extends Component {
     }
 
     deleteProject(id) {
-	    axios.delete('http://localhost:5000/projects/'+id)
+	    axios.delete('http://localhost:8080/projects/'+id)
 	        .then(res => { console.log(res.data)});
 
 	    // update tickets array to all projects without matching id
@@ -54,7 +54,7 @@ export default class ManageProjects extends Component {
     getProjects() {
         return this.state.projects.map(currentProject => {
             return <Project
-            			project={currentProject} 
+            			project={currentProject}
             			deleteProject={this.deleteProject}
                         key={currentProject._id}
                     />;

@@ -12,7 +12,7 @@ export default class TicketList extends Component {
 	}
 
     componentDidMount() {
-        axios.get('http://localhost:5000/tickets/')
+        axios.get('http://localhost:8080/tickets/')
             .then(res => {
                 this.setState({ tickets: res.data })
             })
@@ -20,7 +20,7 @@ export default class TicketList extends Component {
     }
 
     deleteTicket(id) {
-	    axios.delete('http://localhost:5000/tickets/'+id)
+	    axios.delete('http://localhost:8080/tickets/'+id)
 	        .then(res => { console.log(res.data)});
 
 	    // update tickets array to all tickets without matching id
@@ -31,9 +31,9 @@ export default class TicketList extends Component {
 
 	getOpenList() {
         return this.state.tickets.map(currentTicket => {
-            if(currentTicket.status !== 'Resolved') 
-                return <Ticket 
-            			ticket={currentTicket} 
+            if(currentTicket.status !== 'Resolved')
+                return <Ticket
+            			ticket={currentTicket}
             			deleteTicket={this.deleteTicket}
                         key={currentTicket._id}
                         />;
@@ -42,9 +42,9 @@ export default class TicketList extends Component {
 
     getResolvedList() {
         return this.state.tickets.map(currentTicket => {
-            if(currentTicket.status === 'Resolved') 
-                return <Ticket 
-                        ticket={currentTicket} 
+            if(currentTicket.status === 'Resolved')
+                return <Ticket
+                        ticket={currentTicket}
                         deleteTicket={this.deleteTicket}
                         key={currentTicket._id}
                         />;
