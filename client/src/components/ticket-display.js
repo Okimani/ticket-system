@@ -27,7 +27,7 @@ export default class Ticket extends Component {
 
     componentDidMount() {
         // default state of ticket
-        axios.get('http://localhost:8080/tickets/'+this.props.ticket._id)
+        axios.get('/api/tickets/'+this.props.ticket._id)
             .then(res => {
                 this.setState({
                     title: res.data.title,
@@ -43,7 +43,7 @@ export default class Ticket extends Component {
     }
 
     onChangeStatus(e) {
-        // axios.post('http://localhost:8080/tickets/update/' + this.props.ticket._id, this.props.ticket)
+        // axios.post('/api/tickets/update/' + this.props.ticket._id, this.props.ticket)
         //     .then(res => console.log(res.data));
     }
 

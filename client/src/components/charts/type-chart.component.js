@@ -32,7 +32,7 @@ export default class TypeChart extends Component {
 	}
 
 	componentDidMount() {
-        axios.get('http://localhost:8080/tickets/')
+        axios.get('/api/tickets/')
             .then(res => {
                 this.setState({ tickets: res.data });
                 this.state.tickets.map(ticket => {

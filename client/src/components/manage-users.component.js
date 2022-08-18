@@ -28,7 +28,7 @@ export default class ManageUsers extends Component {
 	}
 
     componentDidMount() {
-        axios.get('http://localhost:8080/users/')
+        axios.get('/api/users/')
             .then(res => {
                 this.setState({ users: res.data })
             })
@@ -36,7 +36,7 @@ export default class ManageUsers extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:8080/users/')
+        axios.get('/api/users/')
             .then(res => {
                 this.setState({ users: res.data })
             })
@@ -44,7 +44,7 @@ export default class ManageUsers extends Component {
     }
 
     deleteUser(id) {
-	    axios.delete('http://localhost:8080/users/'+id)
+	    axios.delete('/api/users/'+id)
 	        .then(res => { console.log(res.data)});
 
 	    // update tickets array to all users without matching id

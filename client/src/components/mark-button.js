@@ -22,7 +22,7 @@ export default class MarkButton extends React.Component {
 
 	componentDidMount() {
         // default state of ticket
-        axios.get('http://localhost:8080/tickets/'+this.props.ticketID)
+        axios.get('/api/tickets/'+this.props.ticketID)
             .then(res => {
                 this.setState({
                     title: res.data.title,
@@ -37,7 +37,7 @@ export default class MarkButton extends React.Component {
             .catch((error) => { console.log(error); })
 
         // get list of users to select from
-        axios.get('http://localhost:8080/users/')
+        axios.get('/api/users/')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -48,7 +48,7 @@ export default class MarkButton extends React.Component {
         .catch((error) => { console.log(error); })
 
         // get list of projects to select from
-        axios.get('http://localhost:8080/projects/')
+        axios.get('/api/projects/')
         .then(res => {
             if(res.data.length > 0) {
                 this.setState({
@@ -76,7 +76,7 @@ export default class MarkButton extends React.Component {
             type: this.state.type
         }
 
-        axios.post('http://localhost:8080/tickets/update/' + this.props.ticketID, ticket)
+        axios.post('/api/tickets/update/' + this.props.ticketID, ticket)
             .then(res => console.log(res.data));
 
         alert('Successfully updated.');

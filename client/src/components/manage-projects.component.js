@@ -26,7 +26,7 @@ export default class ManageProjects extends Component {
 	}
 
     componentDidMount() {
-        axios.get('http://localhost:8080/projects/')
+        axios.get('/api/projects/')
             .then(res => {
                 this.setState({ projects: res.data })
             })
@@ -34,7 +34,7 @@ export default class ManageProjects extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:8080/projects/')
+        axios.get('/api/projects/')
             .then(res => {
                 this.setState({ projects: res.data })
             })
@@ -42,7 +42,7 @@ export default class ManageProjects extends Component {
     }
 
     deleteProject(id) {
-	    axios.delete('http://localhost:8080/projects/'+id)
+	    axios.delete('/api/projects/'+id)
 	        .then(res => { console.log(res.data)});
 
 	    // update tickets array to all projects without matching id
