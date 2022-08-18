@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    container_name: ticket-system-client
+    ports:
+      - "3000:3000"
+
+  server:
+    # image: bmarete/ticket-system-server:latest
+    container_name: ticket-system-server
+    env_file: ./.env
+    # depends_on:
+    #   - db
+    build:
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  # db:
+  #   container_name: mongo
+  #   image: mongo:5.0.2
+  #   env_file: ./.env
+  #   ports:
+  #     - '27017:27017'
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER
+  #     MONGO_INITDB_ROOT_PASSWORD: $MONGODB_PASSWORD
+  #   volumes:
+  #     - db:/data/db
+
+  nginx:
+    depends_on:
+      - client
+      - server
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: ticket-system-nginx
+    ports:
+      - "3050:80"
+    restart: always
