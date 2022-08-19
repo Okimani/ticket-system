@@ -42,5 +42,5 @@ services:
       dockerfile: Dockerfile
     container_name: ticket-system-nginx
     ports:
-      - "3050:80"
+      - "80:80"
     restart: always
